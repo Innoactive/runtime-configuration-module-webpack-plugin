@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "moduleName": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": false
+}

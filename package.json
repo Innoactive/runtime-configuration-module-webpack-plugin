@@ -1,0 +1,50 @@
+{
+  "name": "runtime-configuration-module-webpack-plugin",
+  "version": "0.1.0",
+  "description": "A webpack plugin injecting a runtime configuration file based on provided configuration parameters",
+  "license": "Apache-2",
+  "repository": "https://github.com/Innoactive/runtime-configuration-module-webpack-plugin",
+  "author": "Benedikt Reiser <dev@burnedikt.com>",
+  "homepage": "https://github.com/Innoactive/runtime-configuration-module-webpack-plugin",
+  "bugs": "https://github.com/Innoactive/runtime-configuration-module-webpack-plugin/issues",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">= 10.13.0"
+  },
+  "scripts": {
+    "start": "npm run build -- -w",
+    "build": "cross-env NODE_ENV=production babel src -d dist --copy-files",
+    "lint": "eslint ."
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "index.js"
+  ],
+  "peerDependencies": {
+    "webpack": "^4.0.0 || ^5.0.0"
+  },
+  "dependencies": {
+    "schema-utils": "^2.6.6",
+    "virtual-module-webpack-plugin": "^0.4.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@webpack-contrib/eslint-config-webpack": "^3.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.1.0",
+    "babel-preset-env": "^1.7.0",
+    "commitlint-azure-pipelines-cli": "^1.0.3",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "prettier": "^2.0.5",
+    "webpack": "^4.43.0"
+  },
+  "keywords": [
+    "webpack"
+  ]
+}
