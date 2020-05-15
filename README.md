@@ -14,6 +14,24 @@ To begin, you'll need to install `runtime-configuration-module-webpack-plugin`:
 npm install runtime-configuration-module-webpack-plugin --save-dev
 ```
 
+Also, make sure that you're using babel and are having a polyfill for `Object.fromEntries` and `Object.entries`, e.g. by using
+[`@babel/preset-env` with the `useBuiltIns` option][babel-polyfill]: 
+
+**.babelrc.json**
+
+```
+{
+  "presets": [
+  [
+    "@babel/preset-env",
+    {
+        "useBuiltIns": "usage",
+        "corejs": 3
+    }
+  ]
+]
+```
+
 Then add the plugin to your `webpack` config. For example:
 
 **index.js**
@@ -132,3 +150,4 @@ sed -i -e "s;\${SECOND_PARAMETER};${!SECOND_PARAMETER};g" bundle.js
 [envsubst]: https://linux.die.net/man/1/envsubst
 [sed]: https://www.gnu.org/software/sed/manual/sed.html
 [Virtual Module Webpack Plugin]: https://github.com/rmarscher/virtual-module-webpack-plugin
+[babel-polyfill]: https://babeljs.io/docs/en/babel-preset-env#usebuiltins-usage
