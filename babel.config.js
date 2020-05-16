@@ -9,7 +9,7 @@ module.exports = {
     production: {
       // do not transpile the utils as they will be injected as a virtual module and are subject to subsequent transpilation steps
       // of the webpack pipeline that calls this plugin
-      ignore: ['src/utils.js'],
+      ignore: ['src/blueprints/*.js'],
     },
   },
 };

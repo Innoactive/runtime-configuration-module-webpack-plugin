@@ -31,7 +31,10 @@ const getDefaultValuesForConfigurationParameters = (
       // first element being the parameter itself
       // second element being the value of an environment variable with the
       // parameter's name or a placeholder with the parameter's name
-      configurationParameters.map((parameter) => [parameter, ,])
+      configurationParameters.map((parameter) => [
+        parameter,
+        getDefaultValueForParameter(parameter),
+      ])
     )
   );
 };
@@ -57,7 +60,7 @@ export default class RuntimeConfigurationModulePlugin {
     // (helper functions that ensure no variable placeholders remain once
     // the configuration module has been imported)
     const runtimeConfigurationModuleUtilsStr = readFileSync(
-      join(__dirname, 'utils.js'),
+      join(__dirname, 'blueprints/runtime-config.js'),
       'utf8'
     );
 

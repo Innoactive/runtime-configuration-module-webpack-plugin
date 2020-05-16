@@ -1,4 +1,7 @@
-import { isPlaceholderValue, removePlaceholders } from '../src/utils';
+import {
+  isPlaceholderValue,
+  removePlaceholders,
+} from '../src/blueprints/runtime-config';
 
 describe('isPlaceholderValue', () => {
   // eslint-disable-next-line no-template-curly-in-string

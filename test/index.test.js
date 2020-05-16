@@ -1,4 +1,4 @@
-import { getDefaultValueForParameter } from '../src';
+import { getDefaultValueForParameter } from '../src/index';
 
 describe('getDefaultValueForParameter', () => {
   const ORIGINAL_ENV = process.env;
