@@ -1,7 +1,8 @@
-import VirtualModulePlugin from 'virtual-module-webpack-plugin';
-import validateOptions from 'schema-utils';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+
+import VirtualModulePlugin from 'virtual-module-webpack-plugin';
+import validateOptions from 'schema-utils';
 
 import schema from './options.json';
 
