@@ -15,7 +15,7 @@ npm install runtime-configuration-module-webpack-plugin --save-dev
 ```
 
 Also, make sure that you're using babel and are having a polyfill for `Object.fromEntries` and `Object.entries`, e.g. by using
-[`@babel/preset-env` with the `useBuiltIns` option][babel-polyfill]: 
+[`@babel/preset-env` with the `useBuiltIns` option][babel-polyfill]:
 
 **.babelrc.json**
 
@@ -78,9 +78,9 @@ module.exports = {
   plugins: [
     new RuntimeConfigurationModulePlugin({
       parameters: ['MY_SERVICE_URL', 'SECOND_PARAMETER'],
-      moduleName: 'another-module-name.js'
-    })
-  ]
+      moduleName: 'another-module-name.js',
+    }),
+  ],
 };
 ```
 
@@ -103,9 +103,9 @@ module.exports = {
 **index.js**
 
 ```js
-import config from 'runtime-config'
+import config from 'runtime-config';
 
-console.log(config.MY_SERVICE_URL)
+console.log(config.MY_SERVICE_URL);
 ```
 
 **bundle.js**
@@ -117,9 +117,9 @@ export MY_SERVICE_URL=https://example.org/api
 ```
 
 ```js
-console.log(config.MY_SERVICE_URL)
+console.log(config.MY_SERVICE_URL);
 // --> will output https://example.org/api
-console.log(SECOND_PARAMETER)
+console.log(SECOND_PARAMETER);
 // --> will be undefined as not set as an environment variable
 ```
 
@@ -137,6 +137,27 @@ sed -i -e "s;\${SECOND_PARAMETER};${!SECOND_PARAMETER};g" bundle.js
 # --> will set config.SECOND_PARAMETER to "Hello World!"
 ```
 
+## Usage in tests
+
+Since the configuration module injected by this plugin will be virtual, it will not
+actually exist on disk and will thus not work in code that is not running through
+webpack, like e.g. tests. This is why you will need to mock the runtime configuration
+module in your test as virtual.
+
+E.g. when using [jest], mocking a virtual module can be done using the [third parameter
+of the `jest.mock`][jest.mock] function, like:
+
+```js
+jest.mock(
+  '../runtime-config',
+  () => ({
+    MY_SERVICE_URL: 'http://mocked.org',
+    SECOND_PARAMETER: 'some test value',
+  }),
+  { virtual: true } // <-- this is the relevant third parameter
+);
+```
+
 ## License
 
 [Apache 2.0](./LICENSE)
@@ -149,5 +170,6 @@ sed -i -e "s;\${SECOND_PARAMETER};${!SECOND_PARAMETER};g" bundle.js
 [tests-url]: https://dev.azure.com/runtime-configuration-module-plugin/_build/latest?definitionId=2&branchName=master
 [envsubst]: https://linux.die.net/man/1/envsubst
 [sed]: https://www.gnu.org/software/sed/manual/sed.html
-[Virtual Module Webpack Plugin]: https://github.com/rmarscher/virtual-module-webpack-plugin
+[virtual module webpack plugin]: https://github.com/rmarscher/virtual-module-webpack-plugin
 [babel-polyfill]: https://babeljs.io/docs/en/babel-preset-env#usebuiltins-usage
+[jest.mock]: https://jestjs.io/docs/en/jest-object#jestmockmodulename-factory-options
