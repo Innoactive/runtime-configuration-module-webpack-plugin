@@ -15,6 +15,8 @@
     "start": "npm run build -- -w",
     "build": "cross-env NODE_ENV=production babel src -d dist --copy-files",
     "lint": "eslint .",
+    "test": "npm run lint && npm run jest",
+    "jest": "jest",
     "prepare": "npm run build"
   },
   "files": [
@@ -26,6 +28,7 @@
     "webpack": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
+    "core-js": "^3.6.5",
     "schema-utils": "^2.6.6",
     "virtual-module-webpack-plugin": "^0.4.1"
   },
@@ -42,6 +45,8 @@
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.13.0",
+    "jest": "^26.0.1",
     "prettier": "^2.0.5",
     "semantic-release": "^17.0.7",
     "webpack": "^4.43.0"
