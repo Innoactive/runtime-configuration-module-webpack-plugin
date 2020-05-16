@@ -4,14 +4,15 @@ trigger:
 variables:
   npm_config_cache: $(Pipeline.Workspace)/.npm
 
+pool:
+  vmImage: ubuntu-latest
+
 jobs:
   - job: Lint
-    pool:
-      vmImage: ubuntu-latest
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: ^10.13.0
+          versionSpec: ^10.19.0
         displayName: 'Install Node.js'
       - task: Npm@1
         inputs:
@@ -31,10 +32,9 @@ jobs:
         displayName: 'Install dependencies'
       - script: npm run lint
         displayName: 'Run lint'
+      - script: npx commitlint-azure-pipelines --config .commitlintrc.json
 
   - job: Linux
-    pool:
-      vmImage: ubuntu-latest
     strategy:
       maxParallel: 4
       matrix:
@@ -45,11 +45,8 @@ jobs:
           node_version: ^12.0.0
           webpack_version: latest
         node-10:
-          node_version: ^10.13.0
+          node_version: ^10.19.0
           webpack_version: latest
-        node-10-canary:
-          node_version: ^10.13.0
-          webpack_version: next
     steps:
       - task: NodeTool@0
         inputs:
@@ -76,3 +73,13 @@ jobs:
       - script: npm run build
         displayName: 'Run build'
 
+  - job: Release
+    dependsOn:
+      - Lint
+      - Linux
+    steps:
+      - script: npx semantic-release
+        env:
+          GH_TOKEN: '$(GH_TOKEN)'
+          NPM_TOKEN: '$(NPM_TOKEN)'
+        displayName: 'Semantic release'
