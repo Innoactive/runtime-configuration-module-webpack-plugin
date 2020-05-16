@@ -17,7 +17,7 @@ export default class RuntimeConfigurationModulePlugin {
   }
 
   apply(compiler) {
-    const { parameters, moduleName } = this.options;
+    const { parameters = [], moduleName = 'runtime-config.js' } = this.options;
 
     // convert parameterNames into an object looking like
     // eslint-disable-next-line no-irregular-whitespace
