@@ -74,6 +74,9 @@ jobs:
         displayName: 'Run build'
 
   - job: Release
+    dependsOn:
+      - Lint
+      - Linux
     steps:
       - script: npx semantic-release
         env:
