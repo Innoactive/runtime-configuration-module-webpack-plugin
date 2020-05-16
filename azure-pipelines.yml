@@ -90,6 +90,12 @@ jobs:
       - Lint
       - Linux
     steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: ^10.19.0
+        displayName: 'Install Node.js'
+      - script: npm ci
+        displayName: 'Install dependencies'
       - script: npx semantic-release
         env:
           GH_TOKEN: '$(GH_TOKEN)'
