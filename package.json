@@ -52,7 +52,7 @@
     "jest-junit": "^10.0.0",
     "prettier": "^2.0.5",
     "semantic-release": "^19.0.3",
-    "webpack": "^4.43.0"
+    "webpack": "^5.75.0"
   },
   "keywords": [
     "webpack"
